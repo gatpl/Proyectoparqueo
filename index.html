@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parqueo Kristal - Administración de Estacionamiento</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="contenedor nav-flex">
+            <div class="logo">PARQUEO <span>KRISTAL</span></div>
+            <div class="nav-texto">Horario de atención: 6:00 AM a 11:00 PM</div>
+        </div>
+    </header>
+
+    <main class="contenedor">
+
+        <!-- ================= VISTA 1: PÁGINA INFORMATIVA Y ACCESO ================= -->
+        <div id="vista-inicio">
+
+            <!-- Banner de presentación -->
+            <section class="banner-intro">
+                <h1>Bienvenido a Parqueo Kristal</h1>
+                <p>Contamos con amplios sótanos, cámaras de seguridad 24/7, indicadores de espacio y facturación inmediata para tu comodidad.</p>
+            </section>
+
+            <!-- Sección de 4 columnas de servicios y tarifas -->
+            <section class="seccion-tarifas">
+                <div class="columna-servicio">
+                    <div class="icono">🚗</div>
+                    <h3>VEHÍCULOS</h3>
+                    <ul>
+                        <li>Tarifa estándar: Q10.00 por hora</li>
+                        <li>Si ingresa antes de las 10AM y permanece más de 6 horas de Lunes a Viernes tarifa única Q50.00</li>
+                    </ul>
+                </div>
+
+                <div class="columna-servicio">
+                    <div class="icono">🏍️</div>
+                    <h3>MOTOS Y TAXIS</h3>
+                    <ul>
+                        <li>Tarifa estándar: Q10.00 por hora</li>
+                        <li>Si ingresa antes de las 10AM y permanece más de 6 horas de Lunes a Viernes tarifa única Q50.00</li>
+                    </ul>
+                </div>
+
+                <div class="columna-servicio">
+                    <div class="icono">🚲</div>
+                    <h3>BICICLETAS</h3>
+                    <ul>
+                        <li>Parqueo GRATIS para visitantes</li>
+                        <li>Ubicado en Sótano 2 Sur y frente a fachada principal</li>
+                    </ul>
+                </div>
+
+                <div class="columna-servicio">
+                    <div class="icono">🛎️</div>
+                    <h3>VALET PARKING</h3>
+                    <p>Q30.00 por el servicio de valet parking, incluye asistencia preferencial y recepción del vehículo.</p>
+                </div>
+            </section>
+
+            <hr class="divisor">
+
+            <!-- Sección de Registro y Login en 2 columnas -->
+            <section class="grid-acceso">
+                
+                <!-- Paso 1: Registro del Cliente -->
+                <div class="tarjeta">
+                    <h2>Registro de Cliente</h2>
+                    <p class="subtitulo">Registra tus datos personales antes de pasar al cobro de estacionamiento.</p>
+                    
+                    <form id="form-registro">
+                        <label>Nombre completo:</label>
+                        <input type="text" id="nombre" placeholder="Ej. Carlos Gómez" required>
+
+                        <label>NIT:</label>
+                        <input type="text" id="nit" placeholder="Ej. 123456-7 o CF" required>
+
+                        <label>Número de Placa:</label>
+                        <input type="text" id="placa" placeholder="Ej. P-456ABC" required>
+
+                        <button type="submit">Guardar Registro</button>
+                    </form>
+
+                    <!-- Muestra los datos registrados y da paso al sistema -->
+                    <div id="caja-confirmacion" class="confirmacion oculto">
+                        <p><strong>Datos registrados correctamente:</strong></p>
+                        <p id="texto-confirmacion"></p>
+                        <button type="button" id="btn-ir-sistema">Continuar al Sistema</button>
+                    </div>
+                </div>
+
+                <!-- Paso 2: Acceso de Administrador (admin / 2026) -->
+                <div class="tarjeta">
+                    <h2>Acceso al Sistema (Admin)</h2>
+                    <p class="subtitulo">Ingresa con las credenciales de prueba para administrar el parqueo.</p>
+                    
+                    <form id="form-login">
+                        <label>Usuario:</label>
+                        <input type="text" id="usuario" placeholder="admin" required>
+
+                        <label>Contraseña:</label>
+                        <input type="password" id="clave" placeholder="2026" required>
+
+                        <button type="submit" class="btn-oscuro">Iniciar Sesión</button>
+                    </form>
+                    <p id="error-login" class="error oculto">Usuario o clave incorrectos (Usa: admin / 2026)</p>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- ================= VISTA 2: PANEL INTERNO DEL SISTEMA ================= -->
+        <div id="vista-sistema" class="oculto">
+            
+            <div class="barra-superior">
+                <h2>Panel de Administración - Parqueo Kristal</h2>
+                <button type="button" id="btn-salir" class="btn-oscuro btn-pequeno">Volver al Inicio</button>
+            </div>
+
+            <!-- Resumen de Estado, Tarifas y Cliente -->
+            <section class="grid-3">
+                <div class="tarjeta">
+                    <h3>Estado del Parqueo</h3>
+                    <p class="numero-grande"><span id="espacios">42</span></p>
+                    <p>Espacios disponibles en Sótano 1 y 2</p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Tarifas Vigentes</h3>
+                    <p>• Vehículos / Motos: <strong>Q10.00 / hora</strong></p>
+                    <p>• Bicicletas: <strong>Gratis</strong></p>
+                    <p>• Valet Parking: <strong>+ Q30.00</strong></p>
+                </div>
+
+                <div class="tarjeta">
+                    <h3>Cliente en Atención</h3>
+                    <p><strong>Nombre:</strong> <span id="info-nombre"></span></p>
+                    <p><strong>NIT:</strong> <span id="info-nit"></span></p>
+                    <p><strong>Placa:</strong> <span id="info-placa"></span></p>
+                </div>
+            </section>
+
+            <!-- Cálculo de Horas y Factura -->
+            <section class="grid-acceso">
+                <div class="tarjeta">
+                    <h3>Cálculo de Pago</h3>
+                    <form id="form-pago">
+                        <label>Horas que permaneció estacionado:</label>
+                        <input type="number" id="horas" min="1" max="48" value="2" required>
+
+                        <label>Servicio adicional:</label>
+                        <select id="valet">
+                            <option value="0">Sin Valet Parking (Q0.00)</option>
+                            <option value="30">Con Valet Parking (+Q30.00)</option>
+                        </select>
+
+                        <button type="submit">Registrar Pago y Generar Factura</button>
+                    </form>
+                </div>
+
+                <div id="seccion-factura" class="tarjeta factura oculto">
+                    <h3>Factura de Estacionamiento</h3>
+                    <p><strong>PARQUEO KRISTAL - CIUDAD DE GUATEMALA</strong></p>
+                    <hr>
+                    <p><strong>Cliente:</strong> <span id="fac-nombre"></span></p>
+                    <p><strong>NIT:</strong> <span id="fac-nit"></span> | <strong>Placa:</strong> <span id="fac-placa"></span></p>
+                    <p><strong>Tiempo estacionado:</strong> <span id="fac-horas"></span> hora(s) (Q10.00 c/u)</p>
+                    <p><strong>Servicio Valet:</strong> Q<span id="fac-valet"></span>.00</p>
+                    <h3 class="total-destacado">Total a Pagar: Q<span id="fac-total"></span>.00</h3>
+                    <button type="button" id="btn-descargar" class="btn-oscuro">Guardar / Descargar Factura</button>
+                </div>
+            </section>
+
+            <!-- Tabla de Últimos Movimientos -->
+            <section class="tarjeta">
+                <h3>Últimos Movimientos Registrados</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Cliente</th>
+                            <th>Placa</th>
+                            <th>Horas</th>
+                            <th>Total Pagado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-movimientos">
+                        <tr>
+                            <td>Andrea Morales</td>
+                            <td>P-890JKL</td>
+                            <td>3 h</td>
+                            <td>Q30.00</td>
+                        </tr>
+                        <tr>
+                            <td>Roberto Castillo</td>
+                            <td>M-231XYZ</td>
+                            <td>1 h</td>
+                            <td>Q10.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
